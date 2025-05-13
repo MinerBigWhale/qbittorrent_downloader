@@ -1,0 +1,32 @@
+{
+  "name": "qBittorrent Downloader",
+  "version": "1.0.0",
+  "slug": "qbittorrent_downloader",
+  "description": "Addon to download torrents via qBittorrent",
+  "arch": ["amd64", "armv7", "arm64"],
+  "startup": "application",
+  "boot": "auto",
+  "options": {
+    "qbittorrent_url": "http://localhost:8080",
+    "qbittorrent_username": "admin",
+    "qbittorrent_password": "adminadmin",
+    "categories": {
+      "film": "/downloads/films",
+      "series": "/downloads/series",
+      "audio": "/downloads/audio",
+      "app": "/downloads/apps"
+    }
+  },
+  "schema": {
+    "qbittorrent_url": "str",
+    "qbittorrent_username": "str",
+    "qbittorrent_password": "str",
+    "categories": {
+      "film": "str",
+      "series": "str",
+      "audio": "str",
+      "app": "str"
+    }
+  },
+  "webui": "http://[HOST]:[PORT:5000]"
+}
