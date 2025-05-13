@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Load configuration from Home Assistant Add-on options
 with open('/data/options.json') as options_file:
     options = json.load(options_file)
-    
+
 # Print the content of the options file for debugging purposes
 print("Loaded options:", json.dumps(options, indent=4))
 
@@ -19,10 +19,12 @@ CATEGORIES = options.get("CATEGORIES", {})
 
 @app.route('/api/categories', methods=['GET'])
 def get_categories():
+    global CATEGORIES
     return jsonify(CATEGORIES)
 
 @app.route('/api/add_torrent', methods=['POST'])
 def add_torrent():
+    global CATEGORIES, QB_URL,QB_USERNAME, QB_PASSWORD
     data = request.json
     torrent_url = data.get('torrentUrl')
     category = data.get('category')
@@ -43,6 +45,7 @@ def add_torrent():
 
 @app.route('/api/active_torrents', methods=['GET'])
 def list_torrents():
+    global QB_URL, QB_USERNAME, QB_PASSWORD
     response = requests.get(
         f"{QB_URL}/api/v2/torrents/info",
         auth=(QB_USERNAME, QB_PASSWORD)
