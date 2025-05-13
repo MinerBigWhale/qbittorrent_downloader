@@ -71,8 +71,10 @@ def set_script_root():
     if x_ingress_path:
         app.config['APPLICATION_ROOT'] = x_ingress_path
         request.environ['SCRIPT_NAME'] = x_ingress_path
+        if not request.path.startswith(x_ingress_path):
+            request.environ['PATH_INFO'] = x_ingress_path + request.path
 
-        
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8099)
 
