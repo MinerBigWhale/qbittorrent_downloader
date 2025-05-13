@@ -9,7 +9,13 @@ app = Flask(__name__)
 QB_URL = os.getenv("QB_URL", "http://localhost:8080")
 QB_USERNAME = os.getenv("QB_USERNAME", "admin")
 QB_PASSWORD = os.getenv("QB_PASSWORD", "adminadmin")
-CATEGORIES = json.loads(os.getenv("CATEGORIES", '{}'))
+try:
+    CATEGORIES = json.loads(os.getenv("CATEGORIES", '{}'))
+    if not isinstance(CATEGORIES, dict):
+        raise ValueError("CATEGORIES must be a JSON object")
+except (json.JSONDecodeError, ValueError) as e:
+    CATEGORIES = {}
+    print(f"Error loading CATEGORIES: {e}")
 
 @app.route('/api/categories', methods=['GET'])
 def get_categories():
