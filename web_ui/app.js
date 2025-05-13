@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const categorySelect = document.getElementById('category');
 
     // Fetch categories from the backend
-    fetch('/api/categories')
+    fetch('../api/categories')
         .then(response => response.json())
         .then(categories => {
             categories.forEach(category => {
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const torrentUrl = document.getElementById('torrentUrl').value;
         const category = categorySelect.value;
 
-        fetch('/api/add_torrent', {
+        fetch('../api/add_torrent', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ torrentUrl, category })
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch and display active torrents
     function fetchActiveTorrents() {
-        fetch('/api/active_torrents')
+        fetch('../api/active_torrents')
             .then(response => response.json())
             .then(torrents => {
                 const activeTorrentsContainer = document.getElementById('activeTorrents');
