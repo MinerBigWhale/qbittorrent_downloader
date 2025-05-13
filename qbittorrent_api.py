@@ -5,17 +5,14 @@ import requests
 
 app = Flask(__name__)
 
-# Load configuration from environment variables
-QB_URL = os.getenv("QB_URL", "http://localhost:8080")
-QB_USERNAME = os.getenv("QB_USERNAME", "admin")
-QB_PASSWORD = os.getenv("QB_PASSWORD", "adminadmin")
-try:
-    CATEGORIES = json.loads(os.getenv("CATEGORIES", '{}'))
-    if not isinstance(CATEGORIES, dict):
-        raise ValueError("CATEGORIES must be a JSON object")
-except (json.JSONDecodeError, ValueError) as e:
-    CATEGORIES = {}
-    print(f"Error loading CATEGORIES: {e}")
+# Load configuration from Home Assistant Add-on options
+with open('/data/options.json') as options_file:
+    options = json.load(options_file)
+
+QB_URL = options.get("QB_URL", "http://localhost:8080")
+QB_USERNAME = options.get("QB_USERNAME", "admin")
+QB_PASSWORD = options.get("QB_PASSWORD", "adminadmin")
+CATEGORIES = options.get("CATEGORIES", {})
 
 @app.route('/api/categories', methods=['GET'])
 def get_categories():
