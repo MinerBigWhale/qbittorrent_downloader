@@ -12,10 +12,10 @@ with open('/data/options.json') as options_file:
 # Print the content of the options file for debugging purposes
 print("Loaded options:", json.dumps(options, indent=4))
 
-QB_URL = options.get("QB_URL", "http://localhost:8080")
-QB_USERNAME = options.get("QB_USERNAME", "admin")
-QB_PASSWORD = options.get("QB_PASSWORD", "adminadmin")
-CATEGORIES = options.get("CATEGORIES", {})
+QB_URL = options.get("qbittorrent_url", "http://localhost:8080")
+QB_USERNAME = options.get("qbittorrent_username", "admin")
+QB_PASSWORD = options.get("qbittorrent_password", "adminadmin")
+CATEGORIES = options.get("categories", {})
 
 
 print("Loaded options:", json.dumps(CATEGORIES, indent=4))
