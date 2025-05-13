@@ -64,6 +64,15 @@ def serve_static(filename):
 def home():
     return redirect('/web_ui/index.html')
 
+
+@app.before_request
+def set_script_root():
+    x_ingress_path = request.headers.get('X-Ingress-Path')
+    if x_ingress_path:
+        app.config['APPLICATION_ROOT'] = x_ingress_path
+        request.environ['SCRIPT_NAME'] = x_ingress_path
+
+        
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8099)
 
