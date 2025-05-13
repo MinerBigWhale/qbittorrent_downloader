@@ -62,7 +62,8 @@ def serve_static(filename):
 
 @app.route('/')
 def home():
-    return redirect('/web_ui/index.html')
+    x_ingress_path = request.headers.get('X-Ingress-Path', '')
+    return redirect(f'{x_ingress_path}/web_ui/index.html')
 
 
 @app.before_request
