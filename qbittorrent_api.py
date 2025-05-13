@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import requests
 
 app = Flask(__name__)
@@ -55,6 +55,14 @@ def list_torrents():
         return jsonify(formatted_torrents)
     else:
         return jsonify({'message': 'Failed to fetch torrents'}), 500
+
+@app.route('/web_ui/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('web_ui', filename)
+
+app.route('/')
+def home():
+    return redirect('/web_ui/index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8099)
