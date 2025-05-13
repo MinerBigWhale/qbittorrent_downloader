@@ -6,6 +6,9 @@
   "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
   "startup": "application",
   "boot": "auto",
+  "ingress": true,
+  "ingress_port": 8099,
+  "ingress_entry": "/",
   "options": {
     "qbittorrent_url": "http://localhost:8080",
     "qbittorrent_username": "admin",
@@ -28,5 +31,6 @@
       "app": "str"
     }
   },
-  "webui": "http://[HOST]:[PORT:5000]"
+  "panel_icon": "mdi:download",
+  "panel_title": "qBittorrent"
 }
