@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, redirect
 import requests
 
 app = Flask(__name__)
@@ -60,7 +60,7 @@ def list_torrents():
 def serve_static(filename):
     return send_from_directory('web_ui', filename)
 
-app.route('/')
+@app.route('/')
 def home():
     return redirect('/web_ui/index.html')
 
