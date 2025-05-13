@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "slug": "qbittorrent_downloader",
   "description": "Addon to download torrents via qBittorrent",
-  "arch": ["amd64", "armv7", "arm64"],
+  "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
   "startup": "application",
   "boot": "auto",
   "options": {
