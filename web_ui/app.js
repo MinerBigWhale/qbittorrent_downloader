@@ -33,9 +33,46 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 const responseMessage = document.getElementById('responseMessage');
                 responseMessage.textContent = data.message;
+                fetchActiveTorrents(); // Refresh active torrents after adding a new one
             })
             .catch(error => {
                 console.error('Error adding torrent:', error);
             });
     });
+
+    // Fetch and display active torrents
+    function fetchActiveTorrents() {
+        fetch('/api/active_torrents')
+            .then(response => response.json())
+            .then(torrents => {
+                const activeTorrentsContainer = document.getElementById('activeTorrents');
+                activeTorrentsContainer.innerHTML = ''; // Clear previous list
+
+                torrents.forEach(torrent => {
+                    const torrentElement = document.createElement('div');
+                    torrentElement.className = 'torrent';
+
+                    const name = document.createElement('p');
+                    name.textContent = `Name: ${torrent.name}`;
+
+                    const progress = document.createElement('p');
+                    progress.textContent = `Progress: ${torrent.progress}%`;
+
+                    const status = document.createElement('p');
+                    status.textContent = `Status: ${torrent.status}`;
+
+                    torrentElement.appendChild(name);
+                    torrentElement.appendChild(progress);
+                    torrentElement.appendChild(status);
+
+                    activeTorrentsContainer.appendChild(torrentElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching active torrents:', error);
+            });
+    }
+
+    // Initial fetch of active torrents
+    fetchActiveTorrents();
 });

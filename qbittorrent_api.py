@@ -35,5 +35,27 @@ def add_torrent():
     else:
         return jsonify({'message': 'Failed to add torrent'}), 500
 
+@app.route('/api/active_torrents', methods=['GET'])
+def list_torrents():
+    response = requests.get(
+        f"{QB_URL}/api/v2/torrents/info",
+        auth=(QB_USERNAME, QB_PASSWORD)
+    )
+
+    if response.status_code == 200:
+        torrents = response.json()
+        formatted_torrents = [
+            {
+                'name': torrent['name'],
+                'progress': torrent['progress'],
+                'state': torrent['state']
+            }
+            for torrent in torrents
+        ]
+        return jsonify(formatted_torrents)
+    else:
+        return jsonify({'message': 'Failed to fetch torrents'}), 500
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
