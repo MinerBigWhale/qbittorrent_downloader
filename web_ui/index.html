@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>qBittorrent Plugin</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Torrent</h1>
+        <form id="torrentForm">
+            <label for="torrentUrl">Torrent URL:</label>
+            <input type="url" id="torrentUrl" name="torrentUrl" required>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <!-- Categories will be dynamically populated -->
+            </select>
+
+            <button type="submit">Add Torrent</button>
+        </form>
+        <div id="responseMessage"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
