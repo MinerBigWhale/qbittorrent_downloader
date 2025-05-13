@@ -8,6 +8,9 @@ app = Flask(__name__)
 # Load configuration from Home Assistant Add-on options
 with open('/data/options.json') as options_file:
     options = json.load(options_file)
+    
+# Print the content of the options file for debugging purposes
+print("Loaded options:", json.dumps(options, indent=4))
 
 QB_URL = options.get("QB_URL", "http://localhost:8080")
 QB_USERNAME = options.get("QB_USERNAME", "admin")
