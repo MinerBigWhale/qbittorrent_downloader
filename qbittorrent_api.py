@@ -17,9 +17,13 @@ QB_USERNAME = options.get("QB_USERNAME", "admin")
 QB_PASSWORD = options.get("QB_PASSWORD", "adminadmin")
 CATEGORIES = options.get("CATEGORIES", {})
 
+
+print("Loaded options:", json.dumps(CATEGORIES, indent=4))
+
 @app.route('/api/categories', methods=['GET'])
 def get_categories():
     global CATEGORIES
+    print("Loaded options:", json.dumps(CATEGORIES, indent=4))
     return jsonify(CATEGORIES)
 
 @app.route('/api/add_torrent', methods=['POST'])
