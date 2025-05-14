@@ -37,12 +37,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const files = event.dataTransfer.files;
         if (files.length > 0) {
             torrentFileInput.files = files; // Assign the dropped file to the input
+            const fileName = files[0].name; // Get the file name
+            dropZone.querySelector('p').textContent = `Selected file: ${fileName}`; // Display the file name
         }
     });
 
     // Handle click on drop zone
     dropZone.addEventListener('click', () => {
         torrentFileInput.click(); // Trigger the file input click
+    });
+
+    // Update file name when selected via file input
+    torrentFileInput.addEventListener('change', () => {
+        if (torrentFileInput.files.length > 0) {
+            const fileName = torrentFileInput.files[0].name;
+            dropZone.querySelector('p').textContent = `Selected file: ${fileName}`; // Display the file name
+        }
     });
 
     // Handle form submission
