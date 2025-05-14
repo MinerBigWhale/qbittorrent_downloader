@@ -13,19 +13,18 @@
     "qbittorrent_url": "http://localhost:8080",
     "qbittorrent_username": "admin",
     "qbittorrent_password": "adminadmin",
-    "categories": { "category": "path/to/category" }
+    "categories": [ 
+      { "name": "category", "path": "path/to/category" } 
+    ]
   },
   "schema": {
     "qbittorrent_url": "str",
     "qbittorrent_username": "str",
     "qbittorrent_password": "str",
-    "categories": {
-      "type": "list",
-      "items": {
-      "type": "str"
-      },
-      "optional": true
-    }
+    "categories": [{
+      "name": "str",
+      "path": "str"
+    }]
   },
   "panel_icon": "mdi:download",
   "panel_title": "qBittorrent"
