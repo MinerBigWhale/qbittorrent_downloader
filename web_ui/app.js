@@ -45,27 +45,35 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('../api/active_torrents')
             .then(response => response.json())
             .then(torrents => {
-                const activeTorrentsContainer = document.getElementById('activeTorrents');
+                const activeTorrentsContainer = document.querySelector('.torrent-table');
                 activeTorrentsContainer.innerHTML = ''; // Clear previous list
 
                 torrents.forEach(torrent => {
-                    const torrentElement = document.createElement('div');
-                    torrentElement.className = 'torrent';
+                    const torrentRow = document.createElement('div');
+                    torrentRow.className = 'torrent-row';
 
-                    const name = document.createElement('p');
-                    name.textContent = `Name: ${torrent.name}`;
+                    const name = document.createElement('div');
+                    name.className = 'torrent-name';
+                    name.textContent = torrent.name;
 
-                    const progress = document.createElement('p');
-                    progress.textContent = `Progress: ${torrent.progress}%`;
+                    const progressContainer = document.createElement('div');
+                    progressContainer.className = 'torrent-progress-container';
 
-                    const status = document.createElement('p');
-                    status.textContent = `Status: ${torrent.status}`;
+                    const progressBar = document.createElement('div');
+                    progressBar.className = 'torrent-progress-bar';
+                    progressBar.style.width = `${torrent.progress * 100}%`;
 
-                    torrentElement.appendChild(name);
-                    torrentElement.appendChild(progress);
-                    torrentElement.appendChild(status);
+                    progressContainer.appendChild(progressBar);
 
-                    activeTorrentsContainer.appendChild(torrentElement);
+                    const status = document.createElement('div');
+                    status.className = 'torrent-status';
+                    status.textContent = torrent.state;
+
+                    torrentRow.appendChild(name);
+                    torrentRow.appendChild(progressContainer);
+                    torrentRow.appendChild(status);
+
+                    activeTorrentsContainer.appendChild(torrentRow);
                 });
             })
             .catch(error => {

@@ -53,3 +53,52 @@ input[type="submit"]:hover {
     color: red;
     margin-top: 10px;
 }
+
+/* Flex table container */
+.torrent-table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Flex table row */
+.torrent-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Torrent name */
+.torrent-name {
+    flex: 2;
+    font-weight: bold;
+}
+
+/* Progress bar container */
+.torrent-progress-container {
+    flex: 3;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+/* Progress bar */
+.torrent-progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s ease;
+}
+
+/* Torrent status */
+.torrent-status {
+    flex: 1;
+    text-align: right;
+    font-style: italic;
+}

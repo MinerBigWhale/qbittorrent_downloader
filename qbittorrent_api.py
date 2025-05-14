@@ -24,7 +24,7 @@ print("Loaded options:", json.dumps(CATEGORIES, indent=4))
 def get_categories():
     global CATEGORIES
     print("Loaded options:", json.dumps(CATEGORIES, indent=4))
-    return jsonify(CATEGORIES)
+    return jsonify(list(CATEGORIES.keys()))
 
 @app.route('/api/add_torrent', methods=['POST'])
 def add_torrent():
