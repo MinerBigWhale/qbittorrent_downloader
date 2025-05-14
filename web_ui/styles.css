@@ -124,7 +124,23 @@ input[type="submit"]:hover {
         width: 100%; /* Make each item take full width */
         text-align: left; /* Align text to the left */
     }
+    .torrent-progress-container {
+        position: relative;
+        width: 50px; /* Set width for the circular gauge */
+        height: 50px; /* Set height for the circular gauge */
+        border-radius: 50%; /* Make it circular */
+        background-color: #4caf50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
+    .torrent-progress-container::after {
+        content: attr(data-progress) '%'; /* Display progress percentage */
+        position: absolute;
+        font-size: 12px;
+        color: #333;
+    }
     .torrent-progress-container {
         margin: 0; /* Remove horizontal margin */
     }
