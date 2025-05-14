@@ -6,7 +6,6 @@ body {
 }
 
 .container {
-    max-width: 600px;
     background: white;
     padding: 20px;
     border-radius: 5px;
@@ -21,6 +20,7 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
+    max-width: 600px;
 }
 
 label {
@@ -70,13 +70,18 @@ input[type="submit"]:hover {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Torrent name */
 .torrent-name {
     flex: 2;
     font-weight: bold;
+    width: 100px; /* Fixed width for the name */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Progress bar container */
@@ -102,4 +107,29 @@ input[type="submit"]:hover {
     flex: 1;
     text-align: right;
     font-style: italic;
+    width: 50px; /* Fixed width for the status */;
+}
+
+/* Media query for screens larger than 600px */
+@media (max-width: 600px) {
+    .torrent-row {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the start */
+        gap: 10px; /* Add spacing between items */
+    }
+
+    .torrent-name,
+    .torrent-progress-container,
+    .torrent-status {
+        width: 100%; /* Make each item take full width */
+        text-align: left; /* Align text to the left */
+    }
+
+    .torrent-progress-container {
+        margin: 0; /* Remove horizontal margin */
+    }
+
+    .torrent-status {
+        font-style: normal; /* Optional: Adjust font style for better readability */
+    }
 }
