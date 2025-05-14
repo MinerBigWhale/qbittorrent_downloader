@@ -82,6 +82,7 @@ input[type="submit"]:hover {
 /* Progress bar container */
 .torrent-progress-container {
     flex: 3;
+    width: 200px; /* Fixed width for the progress bar */
     height: 20px;
     background-color: #e0e0e0;
     border-radius: 10px;

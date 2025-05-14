@@ -67,7 +67,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const status = document.createElement('div');
                     status.className = 'torrent-status';
-                    status.textContent = torrent.state;
+                    const stateMapping = {
+                        'uploading': '📤 Sending',
+                        'downloading': '📥 Downloading',
+                        'pausedUP': '⏸️ Paused (Sending)',
+                        'pausedDL': '⏸️ Paused (Downloading)',
+                        'queuedUP': '⏳ Queued (Sending)',
+                        'queuedDL': '⏳ Queued (Downloading)',
+                        'stalledUP': '🚫 Stalled (Sending)',
+                        'stalledDL': '🚫 Stalled (Downloading)',
+                        'checkingUP': '🔍 Checking (Sending)',
+                        'checkingDL': '🔍 Checking (Downloading)',
+                        'error': '❌ Error',
+                        'missingFiles': '📂 Missing Files',
+                        'unknown': '❓ Unknown'
+                    };
+
+                    status.textContent = stateMapping[torrent.state] || '❓ Unknown';
 
                     torrentRow.appendChild(name);
                     torrentRow.appendChild(progressContainer);
@@ -83,4 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial fetch of active torrents
     fetchActiveTorrents();
+
+    // Automatically update the torrent list every 5 seconds
+    setInterval(fetchActiveTorrents, 5000);
 });
