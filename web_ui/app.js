@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const progressBar = document.createElement('div');
                     progressBar.className = 'torrent-progress-bar';
                     progressBar.style.width = `${torrent.progress * 100}%`;
+                    progressBar.setAttribute('data-progress', Math.round(torrent.progress * 100)); // Set percentage value
 
                     progressContainer.appendChild(progressBar);
 

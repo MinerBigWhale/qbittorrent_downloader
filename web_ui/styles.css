@@ -100,6 +100,18 @@ input[type="submit"]:hover {
     height: 100%;
     background-color: #4caf50;
     transition: width 0.3s ease;
+    position: relative; /* Make it a positioned element */
+}
+
+.torrent-progress-bar::after {
+    content: attr(data-progress) '%'; /* Display the progress percentage */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the text */
+    color: white; /* Text color */
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Make the text bold */
 }
 
 /* Torrent status */
@@ -122,6 +134,7 @@ input[type="submit"]:hover {
     .torrent-progress-container,
     .torrent-status {
         width: 100%; /* Make each item take full width */
+        height: 20px;
         text-align: left; /* Align text to the left */
     }
     .torrent-progress-container {
