@@ -23,8 +23,9 @@ print("Loaded options:", json.dumps(CATEGORIES, indent=4))
 @app.route('/api/categories', methods=['GET'])
 def get_categories():
     global CATEGORIES
-    print("Loaded options:", json.dumps(CATEGORIES, indent=4))
-    return jsonify(list(CATEGORIES.keys()))
+    # Extract only the 'name' attribute from each category
+    category_names = [category['name'] for category in CATEGORIES]
+    return jsonify(category_names)
 
 @app.route('/api/add_torrent', methods=['POST'])
 def add_torrent():
@@ -33,13 +34,18 @@ def add_torrent():
     category = request.form.get('category')
     torrent_file = request.files.get('torrentFile')
 
-    if category not in CATEGORIES:
-        return jsonify({'message': 'Invalid category'}), 400
+    if not category:
+        return jsonify({'message': 'Category is required'}), 400
 
     if not torrent_file:
         return jsonify({'message': 'No torrent file provided'}), 400
 
-    save_path = CATEGORIES.get(category)
+    # Find the category by name and get its path
+    category_item = next((cat for cat in CATEGORIES if cat['name'] == category), None)
+    if not category_item:
+        return jsonify({'message': 'Invalid category'}), 400
+
+    save_path = category_item['path']
     files = {'torrents': (torrent_file.filename, torrent_file.stream, torrent_file.mimetype)}
 
     response = requests.post(
