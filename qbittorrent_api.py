@@ -28,18 +28,24 @@ def get_categories():
 
 @app.route('/api/add_torrent', methods=['POST'])
 def add_torrent():
-    global CATEGORIES, QB_URL,QB_USERNAME, QB_PASSWORD
-    data = request.json
-    torrent_url = data.get('torrentUrl')
-    category = data.get('category')
+    global CATEGORIES, QB_URL, QB_USERNAME, QB_PASSWORD
+
+    category = request.form.get('category')
+    torrent_file = request.files.get('torrentFile')
 
     if category not in CATEGORIES:
         return jsonify({'message': 'Invalid category'}), 400
 
+    if not torrent_file:
+        return jsonify({'message': 'No torrent file provided'}), 400
+
     save_path = CATEGORIES.get(category)
+    files = {'torrents': (torrent_file.filename, torrent_file.stream, torrent_file.mimetype)}
+
     response = requests.post(
         f"{QB_URL}/api/v2/torrents/add",
-        data={'urls': torrent_url, 'category': category, 'savepath': save_path},
+        data={'category': category, 'savepath': save_path},
+        files=files,
         auth=(QB_USERNAME, QB_PASSWORD)
     )
 

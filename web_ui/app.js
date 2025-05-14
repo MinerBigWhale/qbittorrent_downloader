@@ -21,13 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', event => {
         event.preventDefault();
 
-        const torrentUrl = document.getElementById('torrentUrl').value;
+        const torrentFile = document.getElementById('torrentFile').files[0];
         const category = categorySelect.value;
+
+        if (!torrentFile) {
+            alert('Please select a .torrent file.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('torrentFile', torrentFile);
+        formData.append('category', category);
 
         fetch('../api/add_torrent', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ torrentUrl, category })
+            body: formData
         })
             .then(response => response.json())
             .then(data => {
@@ -68,23 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const status = document.createElement('div');
                     status.className = 'torrent-status';
-                    const stateMapping = {
-                        'uploading': '📤 Sending',
-                        'downloading': '📥 Downloading',
-                        'pausedUP': '⏸️ Paused (Sending)',
-                        'pausedDL': '⏸️ Paused (Downloading)',
-                        'queuedUP': '⏳ Queued (Sending)',
-                        'queuedDL': '⏳ Queued (Downloading)',
-                        'stalledUP': '🚫 Stalled (Sending)',
-                        'stalledDL': '🚫 Stalled (Downloading)',
-                        'checkingUP': '🔍 Checking (Sending)',
-                        'checkingDL': '🔍 Checking (Downloading)',
-                        'error': '❌ Error',
-                        'missingFiles': '📂 Missing Files',
-                        'unknown': '❓ Unknown'
-                    };
-
-                    status.textContent = stateMapping[torrent.state] || '❓ Unknown';
+                    status.textContent = torrent.state;
 
                     torrentRow.appendChild(name);
                     torrentRow.appendChild(progressContainer);
