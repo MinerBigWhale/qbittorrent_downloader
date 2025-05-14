@@ -13,22 +13,18 @@
     "qbittorrent_url": "http://localhost:8080",
     "qbittorrent_username": "admin",
     "qbittorrent_password": "adminadmin",
-    "categories": {
-      "film": "/downloads/films",
-      "series": "/downloads/series",
-      "audio": "/downloads/audio",
-      "app": "/downloads/apps"
-    }
+    "categories": { "category": "path/to/category" }
   },
   "schema": {
     "qbittorrent_url": "str",
     "qbittorrent_username": "str",
     "qbittorrent_password": "str",
     "categories": {
-      "film": "str",
-      "series": "str",
-      "audio": "str",
-      "app": "str"
+      "type": "list",
+      "items": {
+      "type": "str"
+      },
+      "optional": true
     }
   },
   "panel_icon": "mdi:download",
