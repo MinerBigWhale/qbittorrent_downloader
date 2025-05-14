@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const categorySelect = document.getElementById('category');
+    const dropZone = document.getElementById('dropZone');
+    const torrentFileInput = document.getElementById('torrentFile');
 
     // Fetch categories from the backend
     fetch('../api/categories')
@@ -16,12 +18,39 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching categories:', error);
         });
 
+    // Highlight drop zone on drag over
+    dropZone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        dropZone.style.backgroundColor = '#e9e9e9';
+    });
+
+    // Remove highlight on drag leave
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.style.backgroundColor = '#f9f9f9';
+    });
+
+    // Handle file drop
+    dropZone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        dropZone.style.backgroundColor = '#f9f9f9';
+
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+            torrentFileInput.files = files; // Assign the dropped file to the input
+        }
+    });
+
+    // Handle click on drop zone
+    dropZone.addEventListener('click', () => {
+        torrentFileInput.click(); // Trigger the file input click
+    });
+
     // Handle form submission
     const form = document.getElementById('torrentForm');
     form.addEventListener('submit', event => {
         event.preventDefault();
 
-        const torrentFile = document.getElementById('torrentFile').files[0];
+        const torrentFile = torrentFileInput.files[0];
         const category = categorySelect.value;
 
         if (!torrentFile) {

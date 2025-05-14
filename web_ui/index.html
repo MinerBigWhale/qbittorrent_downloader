@@ -11,7 +11,10 @@
         <h1>Add Torrent</h1>
         <form id="torrentForm">
             <label for="torrentFile">Torrent File:</label>
-            <input type="file" id="torrentFile" name="torrentFile" accept=".torrent">
+            <div id="dropZone">
+                <p>Drag and drop a .torrent file here, or click to select one.</p>
+                <input type="file" id="torrentFile" name="torrentFile" accept=".torrent">
+            </div>
 
             <label for="category">Category:</label>
             <select id="category" name="category" required>

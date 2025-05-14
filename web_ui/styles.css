@@ -54,6 +54,32 @@ input[type="submit"]:hover {
     margin-top: 10px;
 }
 
+/* Drop zone styling */
+#dropZone {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+#dropZone:hover {
+    background-color: #f1f1f1;
+}
+
+#dropZone p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+#torrentFile {
+    display: none; /* Hide the default file input */
+}
+
 /* Flex table container */
 .torrent-table {
     display: flex;
