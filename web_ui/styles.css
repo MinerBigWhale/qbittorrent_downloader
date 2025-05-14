@@ -111,7 +111,7 @@ input[type="submit"]:hover {
 }
 
 /* Media query for screens larger than 600px */
-@media (max-width: 600px) {
+@media (max-width: 850px) {
     .torrent-row {
         flex-direction: column; /* Stack items vertically */
         align-items: flex-start; /* Align items to the start */
