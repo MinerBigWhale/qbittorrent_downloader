@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(categories => {
             categories.forEach(category => {
                 const option = document.createElement('option');
-                option.value = category.name;
-                option.textContent = category.name;
+                option.value = category;
+                option.textContent = category;
                 categorySelect.appendChild(option);
             });
         })

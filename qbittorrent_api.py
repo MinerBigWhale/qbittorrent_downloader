@@ -36,9 +36,10 @@ def add_torrent():
     if category not in CATEGORIES:
         return jsonify({'message': 'Invalid category'}), 400
 
+    save_path = CATEGORIES.get(category)
     response = requests.post(
         f"{QB_URL}/api/v2/torrents/add",
-        data={'urls': torrent_url, 'category': category},
+        data={'urls': torrent_url, 'category': category, 'savepath': save_path},
         auth=(QB_USERNAME, QB_PASSWORD)
     )
 
